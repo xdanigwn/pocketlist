@@ -1,0 +1,78 @@
+{
+    "balance": {
+        "total": 40000000
+    },
+    "personal": {
+        "income": 6000000,
+        "expense": 4000000
+    },
+    "account": [
+        {
+            "_id": {
+                "$oid": "5f6f690a9fd56b291005a358"
+            },
+            "userId": [
+                {
+                    "$oid": "5f6f68fc9fd56b291005a357"
+                }
+            ],
+            "accName": "CIMB Niaga",
+            "accType": "Debit",
+            "balance": 40000000,
+            "accImageUrl": "images/1601475160924.png",
+            "__v": 0
+        },
+        {
+            "_id": {
+                "$oid": "5f6f8fbdee13e2291caf3379"
+            },
+            "userId": {
+                "$oid": "5f6f68fc9fd56b291005a357"
+            },
+            "accName": "OVO Points",
+            "accType": "EMoney",
+            "balance": 120000,
+            "accImageUrl": "images/1601475183970.png",
+            "__v": 2
+        },
+        {
+            "_id": {
+                "$oid": "5f6f8fcbee13e2291caf337a"
+            },
+            "userId": {
+                "$oid": "5f70835f6233cf1f747b647c"
+            },
+            "accName": "Jenius",
+            "accType": "Debit",
+            "balance": 1000000,
+            "accImageUrl": "images/1601146827989.png",
+            "__v": 2
+        },
+        {
+            "_id": {
+                "$oid": "5f7492fcbc4b57253cf461c2"
+            },
+            "userId": {
+                "$oid": "5f6f68fc9fd56b291005a357"
+            },
+            "accName": "Wallet",
+            "accType": "Cash",
+            "balance": 150000,
+            "accImageUrl": "images/1601475324148.png",
+            "__v": 0
+        },
+        {
+            "_id": {
+                "$oid": "5f74a4c9eea90e348078b116"
+            },
+            "userId": {
+                "$oid": "5f6f68fc9fd56b291005a357"
+            },
+            "accName": "CITI",
+            "accType": "Credit",
+            "balance": -1500000,
+            "accImageUrl": "images/1601479881768.png",
+            "__v": 0
+        }
+    ]
+}
