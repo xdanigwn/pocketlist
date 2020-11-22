@@ -52,8 +52,8 @@ export default class PanelAccount extends Component {
                         data-toggle="dropdown"
                       >
                         <div className="badge">
-                          <img alt="" className="left mr-2" src={this.state.selectedAccImage} style={{ width: "24px" }} />
-                          <span>{this.state.selectedAccName}</span>&nbsp; - &nbsp;
+                          <img alt="" className="left mr-2" src={`${`https://admin-pocketlist.herokuapp.com`}/${this.state.selectedAccImage}`} style={{ width: "24px" }} />
+                          <span>{this.state.selectedAccName}</span>&nbsp;-&nbsp;
                           <span>{this.state.selectedAccBalance}</span>
                         </div>
                       </button>
@@ -65,7 +65,7 @@ export default class PanelAccount extends Component {
                         {this.props.data.map((account, index) => {
                           return (
                             <li
-                              key={account.accName}
+                              key={account._id}
                               href="/#"
                               className="dropdown-item d-flex justify-content-between"
                               onClick={this.selectAccount}
@@ -74,8 +74,8 @@ export default class PanelAccount extends Component {
                               data-balance={account.balance}
                             >
                               <div className="badge">
-                                <img alt="" className="left mr-2" src={account.accImageUrl} />
-                                <span> {account.accName}</span>
+                                <img alt="" style={{ width: "32px" }} className="left mr-2" src={`${`https://admin-pocketlist.herokuapp.com`}/${account.accImageUrl}`} />
+                                <span> {account.accName} </span>
                               </div>
                               <div className="badge d-flex align-items-center">
                                 {account.balance}

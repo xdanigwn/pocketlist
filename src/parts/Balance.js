@@ -29,7 +29,7 @@ export default class PanelBalance extends Component {
           <div className="card bg-primary text-white ">
             <div className="card-header">Balance</div>
             <div className="card-body main align-items-center text-center">
-              <h4 className="card-text mt-4 mt-md-0">{this.props.data.total}</h4>
+              <h4 className="card-text mt-4 mt-md-0">{this.props.data.totaBalance}</h4>
               <span>(9 Jul 2020)</span>
             </div>
             <div className="card-footer text-right">

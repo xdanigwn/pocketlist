@@ -37,11 +37,11 @@ export default function Header(props) {
                     Reports
                   </Button>
                 </li>
-                <li className={`nav-item${getNavLinkClass("/settings")}`}>
+                {/* <li className={`nav-item${getNavLinkClass("/settings")}`}>
                   <Button className="nav-link" type="link" href="/settings">
                     Settings
                   </Button>
-                </li>
+                </li> */}
               </ul>
               <div className="box-profile">
                 <IconProfile />

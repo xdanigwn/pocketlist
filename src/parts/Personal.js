@@ -37,7 +37,7 @@ export default class PanelPersonal extends Component {
                   </div>
                   <div className="col-7 pl-0">
                     <h6>Income</h6>
-                    <span>{this.props.data.income}</span>
+                    <span>{this.props.data.sumIncome}</span>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@ export default class PanelPersonal extends Component {
                   </div>
                   <div className="col-7 pl-0">
                     <h6>Expense</h6>
-                    <span>{this.props.data.expense}</span>
+                    <span>{this.props.data.sumExpense}</span>
                   </div>
                 </div>
               </div>
