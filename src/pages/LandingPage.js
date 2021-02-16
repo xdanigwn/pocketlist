@@ -14,17 +14,27 @@ import { fetchPage } from "store/actions/page";
 class LandingPage extends Component {
   // constructor(props) {
   //     super(props);
-  //     this.refMostPicked = React.createRef();
+  //     this.state = {
+  //       textUpdated : false
+  //     }
   // }
 
   componentDidMount() {
-    if (!this.props.page.landingPage) this.props.fetchPage("landingPage");
+    if (!this.props.page.landingPage)
+      this.refreshPage();    
+  }
+
+  refreshPage = () => {
+    this.props.fetchPage(`http://localhost:3000/api/v1/overview`, "landingPage");
   }
 
   render() {
     const { page } = this.props;
-    console.log(page);
+    
     if (!page.hasOwnProperty("landingPage")) return null;
+    // console.log(page.landingPage.accTransfer);
+
+    // console.log(this.props.page.landingPage.accTransfer);
 
     return (
       <>
@@ -32,11 +42,16 @@ class LandingPage extends Component {
         <section>
           <div className='container'>
             <div className='row'>
-              <Balance
-                refMostPicked={this.refMostPicked}
-                data={page.landingPage}></Balance>
+              <Balance data={page.landingPage}></Balance>
               <Personal data={page.landingPage}></Personal>
-              <Account data={page.landingPage.account}></Account>
+              <Account data= {page.landingPage.account} 
+                  datactgInc={page.landingPage.categoryInc} 
+                  datactg={page.landingPage.categoryExp} 
+                  refreshPage={this.refreshPage}>
+              </Account>
+              {/* <button type='button' className='btn btn-secondary float-right' data-dismiss='modal' onClick={(e) => this.refreshPage(e)}>
+                Refresh
+              </button> */}
             </div>
           </div>
         </section>
@@ -50,4 +65,5 @@ const mapStateToProps = (state) => ({
   page: state.page,
 });
 
+  
 export default connect(mapStateToProps, { fetchPage })(LandingPage);

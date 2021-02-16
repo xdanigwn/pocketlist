@@ -23,15 +23,19 @@ export const addTrans = (transObj) => {
 
   return (dispatch) => {
     return axios
-      .post(`http://localhost:3000/api/v1/addtrans`, transObj, {
-        headers: {
-          "content-type": "application/json;charset=utf-8",
-        },
-        // proxy: {
-        //   host: "localhost",
-        //   port: 3000,
-        // },
-      })
+      .post(
+        `https://admin-pocketlist.herokuapp.com/api/v1/addtrans`,
+        transObj,
+        {
+          headers: {
+            "content-type": "application/json;charset=utf-8",
+          },
+          // proxy: {
+          //   host: "localhost",
+          //   port: 3000,
+          // },
+        }
+      )
       .then(() => {
         dispatch({
           type: ADD_TRANS,

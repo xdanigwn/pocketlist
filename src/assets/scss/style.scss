@@ -47,10 +47,21 @@ body {
   line-height: 1;
 }
 
+//TABLE 
+.mytable{
+  background-color: #f7f7f7;
+  font-weight: 300;
+}
+//CARD
 section {
   background-color: $gray-300;
 
-  //CARD
+  @media (max-width: 576px) {
+    .hidden-mobile {
+      display: none;
+    }
+  }
+
   @media (min-width: 992px) {
     .no-paddingleft {
       padding-left: 0px;
@@ -112,6 +123,27 @@ section {
       opacity: 0.5;
     }
   }
+
+  // DROPDOWN 
+  .dropdown {
+    .btn {
+      padding : 0rem 0.25rem;
+    }
+    .btn-dropdown {
+      border: 1px solid #dddddd;
+      border-radius : 0.25rem;
+      &:focus{
+        border: 1px solid #6e6e6e !important;
+        border-radius : 0.25rem !important;
+        outline: none; // outline disable when focused
+      }
+    }
+    .dropdown-item{
+      padding: 0.25rem 0.5rem;
+    }
+    
+  }
+
   // MODAL
   .backdrop {
     position: fixed;
@@ -241,3 +273,43 @@ footer {
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.fade-effect { 
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+

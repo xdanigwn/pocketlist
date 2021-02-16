@@ -1,11 +1,9 @@
 import { FETCH_PAGE } from "../types";
 import axios from "axios";
 
-export const fetchPage = (page) => (dispatch) => {
+export const fetchPage = (url, page) => (dispatch) => {
   return axios
-    .get(`https://admin-pocketlist.herokuapp.com/api/v1/overview`, null, {
-      crossdomain: true,
-    })
+    .get(url)
     .then((response) => {
       dispatch({
         type: FETCH_PAGE,
