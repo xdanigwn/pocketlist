@@ -24,7 +24,7 @@ export default function Header(props) {
               <ul className="navbar-nav m-auto">
                 <li className={`nav-item${getNavLinkClass("/")}`}>
                   <Button className="nav-link" type="link" href="/">
-                    Overview Bro
+                    Overview
                   </Button>
                 </li>
                 <li className={`nav-item${getNavLinkClass("/report")}`}>
@@ -34,7 +34,7 @@ export default function Header(props) {
                     href="/report"
                     hasShadow
                   >
-                    Reports Bro
+                    Reports
                   </Button>
                 </li>
                 {/* <li className={`nav-item${getNavLinkClass("/settings")}`}>
