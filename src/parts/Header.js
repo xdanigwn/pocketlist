@@ -34,7 +34,7 @@ export default function Header(props) {
                     href="/report"
                     hasShadow
                   >
-                    Reports
+                    Reports Bro
                   </Button>
                 </li>
                 {/* <li className={`nav-item${getNavLinkClass("/settings")}`}>
