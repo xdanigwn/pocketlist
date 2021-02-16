@@ -25,7 +25,7 @@ class LandingPage extends Component {
   }
 
   refreshPage = () => {
-    this.props.fetchPage(`http://admin-pocketlist.herokuapp.com:3000/api/v1/overview`, "landingPage");
+    this.props.fetchPage(`https://admin-pocketlist.herokuapp.com:3000/api/v1/overview`, "landingPage");
   }
 
   render() {
