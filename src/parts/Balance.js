@@ -19,6 +19,7 @@ export default class PanelBalance extends Component {
       modalBalanceVis: !prevState.modalBalanceVis,
     }));
   };
+  
   toggleBalanceClose = () => {
     this.setState({ 
       modalBalanceVis: false,

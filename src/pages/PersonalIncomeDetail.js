@@ -45,8 +45,10 @@ import { Link } from "react-router-dom";
         console.log(page)
         return(
             <div className="container">
+                    <div className="my-2"></div>
                     <div className="my-2">
                         <Link to={"/"}> <img className="border-right border-light mr-2" src={iconBack} alt='Transaction'></img></Link>
+                        {/* { ` ` } On Account :   */}
                         {/* MENGAMBIL BALANCE DI MODEL ACCOUNT. DENGAN MENGAMBIL ARRAY KE 0 KARENA CUMA 1 ROW */}
                         { ` ` } <img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${page.accountDetailPage.trans[0].accountId.accImageUrl}`}/> 
                         { ` ` + page.accountDetailPage.trans[0].accountId.accName + ` - `
