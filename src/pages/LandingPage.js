@@ -34,7 +34,7 @@ class LandingPage extends Component {
     if (!page.hasOwnProperty("landingPage")) return null;
     // console.log(page.landingPage.accTransfer);
 
-    // console.log(this.props.page.landingPage.accTransfer);
+    // console.log(this.props.page.landingPage);
 
     return (
       <>

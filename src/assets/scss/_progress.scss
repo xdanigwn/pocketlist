@@ -12,7 +12,7 @@
   overflow: hidden; // force rounded corners by cropping it
   line-height: 0;
   @include font-size($progress-font-size);
-  background-color: $progress-bg;
+  // background-color: $progress-bg;
   @include border-radius($progress-border-radius);
   @include box-shadow($progress-box-shadow);
 }
