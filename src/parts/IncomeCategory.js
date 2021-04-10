@@ -55,6 +55,6 @@ class IncomeCategory extends Component {
 
 const mapStateToProps = (state) => ({
     page: state.page,
-  });
+});
 
 export default connect(mapStateToProps, { fetchPage })(IncomeCategory); // fetchpage dimasukan kedalam page

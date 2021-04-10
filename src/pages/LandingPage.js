@@ -25,7 +25,7 @@ class LandingPage extends Component {
   }
 
   refreshPage = () => {
-    this.props.fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/overview`, "landingPage");
+    this.props.fetchPage(`http://localhost:3000/api/v1/overview`, "landingPage");
   }
 
   render() {
@@ -43,7 +43,9 @@ class LandingPage extends Component {
           <div className='container'>
             <div className='row'>
               <Balance data={page.landingPage}></Balance>
-              <Personal data={page.landingPage}></Personal>
+              <Personal data={page.landingPage}
+                  refreshPage={this.refreshPage}
+              ></Personal>
               <Account data= {page.landingPage.account} 
                   datactgInc={page.landingPage.categoryInc} 
                   datactg={page.landingPage.categoryExp} 

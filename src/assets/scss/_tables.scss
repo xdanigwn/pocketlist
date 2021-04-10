@@ -118,6 +118,14 @@
     }
   }
 
+  .thead-orange {
+    th {
+      color: $table-dark-color;
+      background-color: #fa991c;
+      border-color: #e48c19;
+    }
+  }
+
   .thead-light {
     th {
       color: $table-head-color;

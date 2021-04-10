@@ -7,15 +7,18 @@ import iconIncome from "assets/images/icons-overview/Income.svg";
 import iconExpense from "assets/images/icons-overview/Expense.svg";
 // import { ModalHooks } from "elements/ModalHooks";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 function PanelPersonal(props) {
+  
   const [incomeUpdated, setIncUpdated] = useState(false);
   const [expenseUpdated, setExpUpdated] = useState(false);
   const [modalBalanceVis, setModalBalanceVis] = useState(false);
-  const prevIncRef = usePrevious(props.data.sumIncome) // Menyimpan nilai lama total balance
-  const prevExpRef = usePrevious(props.data.sumExpense) // Menyimpan nilai lama total balance
-  // const prevTextRef = usePrevious(incomeUpdated)
-  // const prevTextRef = usePrevious(expenseUpdated)
+  const prevIncRef = usePrevious(props.data.sumIncome) // Menyimpan nilai lama total income
+  const prevExpRef = usePrevious(props.data.sumExpense) // Menyimpan nilai lama total expense
+  
+  const dateFrom = usePrevious(moment().startOf("month").format("YYYY-MM-DD"))
+  const dateTo = usePrevious(moment().format("YYYY-MM-DD"))
 
   const toggleBalance = () => {
     setModalBalanceVis(prev => !prev);
@@ -29,7 +32,7 @@ function PanelPersonal(props) {
     return ref.current;
   }
 
-  useEffect (() => {
+  useEffect (() => { // COMPDIDUPDATE FOR FUNCTION COMP => APABILA ADA PERUBAHAN PADA COMPONENT TERSEBUT
     // const { data } = this.props;
    
     // JIKA ADA PERUBAHAN DATA, MAKA FADE IN
@@ -101,7 +104,7 @@ function PanelPersonal(props) {
             </div>
           </div>
           <div className='card-footer'>
-            <div className='float-left mt-2 ml-2'><small> 1 Mar 2021 - 17 Mar 2021 </small></div>
+            <div className='float-left mt-2 ml-2'><small><i>Filter : {moment(dateFrom, 'YYYY-MM-DD').format("DD MMM YYYY")} - {moment(dateTo, 'YYYY-MM-DD').format("DD MMM YYYY")} </i></small></div>
             <div className='float-right'>
 
               <Button href='/' type='link' onClick={toggleBalance}>
@@ -115,7 +118,10 @@ function PanelPersonal(props) {
         <ModalDate
           title='Date'
           onCancel={toggleBalance}
+          refreshPage={props.refreshPage}
           modalVisible={modalBalanceVis}
+          dateFrom={dateFrom}
+          dateTo={dateTo}
           className='ModalDate'
         ></ModalDate>
       </div>
