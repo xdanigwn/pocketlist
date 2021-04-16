@@ -35,7 +35,7 @@ class ModalInfo extends Component {
           <table className="table table-striped table-bordered mt-2">
           <thead className="thead-orange">
               <tr>
-                  <th className="text-center" colspan="2">Debit</th>
+                  <th className="text-center" colSpan="2">Debit</th>
               </tr>
           </thead>
           <thead className="thead-dark">
@@ -53,14 +53,14 @@ class ModalInfo extends Component {
               </tr>
               )
           }
-          { <tr><td colspan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumDebit) )}</td></tr> } 
+          { <tr><td colSpan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumDebit) )}</td></tr> } 
           </tbody>
           </table>
 
           <table className="table table-striped table-bordered mt-2">
           <thead className="thead-orange">
               <tr>
-                  <th className="text-center" colspan="2">Credit</th>
+                  <th className="text-center" colSpan="2">Credit</th>
               </tr>
           </thead>
           <thead className="thead-dark">
@@ -78,7 +78,7 @@ class ModalInfo extends Component {
               </tr>
               )
           }
-          { <tr><td colspan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumCredit) )}</td></tr> } 
+          { <tr><td colSpan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumCredit) )}</td></tr> } 
           </tbody>
           </table>          
         </Modal>

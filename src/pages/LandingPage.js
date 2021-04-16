@@ -5,6 +5,7 @@ import Footer from "parts/Footer";
 import Balance from "parts/Balance";
 import Personal from "parts/Personal";
 import Account from "parts/Account";
+import moment from "moment";
 
 import { fetchPage } from "store/actions/page";
 // import PanelProduct from 'parts/PanelProduct'
@@ -12,29 +13,20 @@ import { fetchPage } from "store/actions/page";
 // import landingPage from "json/landingPage.json"
 
 class LandingPage extends Component {
-  // constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       textUpdated : false
-  //     }
-  // }
-
   componentDidMount() {
     if (!this.props.page.landingPage)
-      this.refreshPage();    
+      this.refreshPage(moment().startOf("month").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD"));  // SET FIRST LOAD WITH FIRST DATE OF MONTH - NOW DATE
   }
 
-  refreshPage = () => {
-    this.props.fetchPage(`http://localhost:3000/api/v1/overview`, "landingPage");
+  refreshPage = (dateFrom, dateTo) => {
+    this.props.fetchPage(`http://localhost:3000/api/v1/overview/${dateFrom}/${dateTo}`, "landingPage");
   }
 
   render() {
     const { page } = this.props;
     
     if (!page.hasOwnProperty("landingPage")) return null;
-    // console.log(page.landingPage.accTransfer);
-
-    // console.log(this.props.page.landingPage);
+    // console.log(page.landingPage.accTransfer)
 
     return (
       <>

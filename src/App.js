@@ -13,11 +13,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/" exact component={LandingPage}></Route>
+        <Route exact path="/" component={LandingPage} ></Route>
         <Route path="/report" component={ReportPage}></Route>
         <Route path="/accountdtl/:id_account" component={AccountDetail}></Route>
-        <Route path="/personalincdtl" component={PersonalIncDetail}></Route>
-        <Route path="/personalexpdtl" component={PersonalExpDetail}></Route>
+        <Route path="/personalincdtl/:id/:dateFrom/:dateTo" component={PersonalIncDetail}></Route>
+        <Route path="/personalexpdtl/:id/:dateFrom/:dateTo" component={PersonalExpDetail}></Route>
         {/* <Route path="/settings" component={SettingsPage}></Route> */}
       </Router>
     </div>

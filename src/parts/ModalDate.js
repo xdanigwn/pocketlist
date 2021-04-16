@@ -1,11 +1,22 @@
 import React from "react";
 import Modal from "elements/Modal";
-// import moment from "moment";
 
 function ModalDate(props) {
+
+    // const dateFrom = usePrevious()
+    // const dateTo = usePrevious()
+
+    // function usePrevious(value) {
+    //   const ref = useRef();
+    //   useEffect(() => {
+    //     ref.current = value;
+    //   });
+    //   return ref.current;
+    // }
+
     const handleOnSubmit = (e) => {
-      alert('halo');
-      props.refreshPage();
+      // alert('halo');
+      props.refreshPage(props.dateFrom, props.dateTo);
       props.onCancel();
     }
 
@@ -24,7 +35,7 @@ function ModalDate(props) {
                   From
                 </label>
                 <div className='col-9'>
-                <input type="date" id="date" className='form-control' value={props.dateFrom}></input>
+                <input type="date" id="date" className='form-control' value={props.dateFrom} onChange={(e) => props.setDateFrom(e.target.value)}></input>
                 </div>
               </div>
               <div className='form-group row'>
@@ -32,7 +43,7 @@ function ModalDate(props) {
                   To
                 </label>
                 <div className='col-9'>
-                <input type="date" id="date" className='form-control' value={props.dateTo}></input>
+                <input type="date" id="date" className='form-control' value={props.dateTo} onChange={(e) => props.setDateTo(e.target.value)}></input>
                 </div>
               </div>
 
@@ -40,9 +51,7 @@ function ModalDate(props) {
                   Submit
               </button>
             </form>
-         
-          
-
+        
         </Modal>
       </>
     );

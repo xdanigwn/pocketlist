@@ -14,11 +14,12 @@ function PanelPersonal(props) {
   const [incomeUpdated, setIncUpdated] = useState(false);
   const [expenseUpdated, setExpUpdated] = useState(false);
   const [modalBalanceVis, setModalBalanceVis] = useState(false);
+  
   const prevIncRef = usePrevious(props.data.sumIncome) // Menyimpan nilai lama total income
   const prevExpRef = usePrevious(props.data.sumExpense) // Menyimpan nilai lama total expense
   
-  const dateFrom = usePrevious(moment().startOf("month").format("YYYY-MM-DD"))
-  const dateTo = usePrevious(moment().format("YYYY-MM-DD"))
+  const [dateFrom, setDateFrom] = useState(moment().startOf("month").format("YYYY-MM-DD"));
+  const [dateTo, setDateTo] = useState(moment().format("YYYY-MM-DD"));
 
   const toggleBalance = () => {
     setModalBalanceVis(prev => !prev);
@@ -78,7 +79,7 @@ function PanelPersonal(props) {
               <div className='col-md-6 mt-1'>
                 <div className='row'>
                   <div className='col'>
-                    <Link to={"/personalincdtl/"} >
+                    <Link to={`/personalincdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} refreshPage={props.refreshPage}>
                       <img src={iconIncome} alt='income' />
                     </Link>
                   </div>
@@ -91,7 +92,7 @@ function PanelPersonal(props) {
               <div className='col-md-6 mt-1'>
                 <div className='row'>
                   <div className='col'>
-                    <Link to={"/personalexpdtl/5f6f68fc9fd56b291005a357"} >
+                    <Link to={`/personalexpdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} refreshPage={props.refreshPage}>
                       <img src={iconExpense} alt='expense' />
                     </Link>
                   </div>
@@ -121,7 +122,9 @@ function PanelPersonal(props) {
           refreshPage={props.refreshPage}
           modalVisible={modalBalanceVis}
           dateFrom={dateFrom}
+          setDateFrom={setDateFrom}
           dateTo={dateTo}
+          setDateTo={setDateTo}
           className='ModalDate'
         ></ModalDate>
       </div>
