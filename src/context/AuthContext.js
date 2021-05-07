@@ -11,7 +11,7 @@ function AuthContextProvider(props) {
 
 
     async function getLoggedIn() { 
-        const loggedInRes = await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/authcheck"); //run endpoint authcheck. return true / false
+        const loggedInRes = await axios.get("http://localhost:3000/api/v1/authcheck"); //run endpoint authcheck. return true / false
         setUserId(loggedInRes.data.verif_user)
         setLoggedIn(loggedInRes.data.status) // fill with true/false = data loggedInRes
     }
