@@ -1,4 +1,4 @@
-import React, { useEffect  } from 'react'
+import React, { useEffect, useContext  } from 'react'
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/page";
 import iconBack from "assets/images/icons-operator/Back.svg";
@@ -6,30 +6,37 @@ import iconExpenseClear from "assets/images/icons-overview/Expense_Clear.svg";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
- function PersonalExpenseDetail (props){
+import AuthContext from "context/AuthContext"
+import { Redirect } from 'react-router';
 
-    const refreshDetail = () => {
-        props.fetchPage(
-            `http://localhost:3000/api/v1/personalexpdtl/5f6f68fc9fd56b291005a357/${props.match.params.dateFrom}/${props.match.params.dateTo}`, "personalExpDtlPage");
+ function ExpDetailPage (props){
+    const { fetchPage, match, page} = props
 
-    }
-
+    const { loggedIn, userId }  = useContext(AuthContext)
+    
     useEffect (() => {
+        const refreshDetail = () => {
+            if(userId){
+                fetchPage(
+                    `http://localhost:3000/api/v1/personalexpdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalExpDtlPage");
+            }
+            
+    
+        }
         refreshDetail();
-        // console.log(page)
-    })
+    }, [fetchPage, match, userId])
 
-    const { page } = props; 
+    
     if (!page.hasOwnProperty("personalExpDtlPage")) return null;
-
+    if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
     // console.log(page.personalExpDtlPage)
     
     return(
             <div className="container">
                 <div className="my-2">
-                    <Link to={"/"} > <img className="border-right border-light mr-2" src={iconBack} alt='Transaction'></img></Link>
-                    <img width="32px" className="" src={iconExpenseClear} alt='expense' /><span className="mt-2 ml-2">Expense</span>    
-                    {` --- Filter : ${moment(props.match.params.dateFrom).format("DD MMM YYYY")} - ${moment(props.match.params.dateTo).format("DD MMM YYYY")}`}
+                    <Link to={"/landingpage"} > <img className="border-right border-light mr-2" src={iconBack} alt='Transaction'></img></Link>
+                    <img width="32px" className="" src={iconExpenseClear} alt='expense' /><span className="border-right pr-2 mt-2 ml-2">Expense</span>    
+                    <i><small>{` Filter : ${moment(props.match.params.dateFrom).format("DD MMM YYYY")} - ${moment(props.match.params.dateTo).format("DD MMM YYYY")}`}</small></i>    
                 </div>
 
                 <table className="table table-md table-responsive-md table-striped table-bordered table-hover mytable mt-2">
@@ -49,11 +56,11 @@ import { Link } from "react-router-dom";
                         page.personalExpDtlPage.trans.map((trans,id) =>
                         <tr key={id}>
                             <td className="text-center">{id+1}</td>
-                            <td className="text-center"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${trans.transAcc.accImageUrl}`}></img></td>
+                            <td className="text-center"><img alt="" width="32px" src={`${`http://localhost:3000`}/${trans.transAcc.accImageUrl}`}></img></td>
                             <td className="text-center">{moment(trans.transDate).format("DD-MM-YYYY") }</td>
                             <td className="text-center">{trans.transDesc}</td>
                             <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(trans.ammount) )}</td>
-                            <td className="text-center"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${trans.transCtg.ctgImageUrl}`}></img></td>
+                            <td className="text-center"><img alt="" width="32px" src={`${`http://localhost:3000`}/${trans.transCtg.ctgImageUrl}`}></img></td>
                         </tr>
                         )
                         }
@@ -68,4 +75,4 @@ const mapStateToProps = (state) => ({
     page: state.page,
   });
 
-export default connect(mapStateToProps, { fetchPage })(PersonalExpenseDetail); // fetchpage dimasukan kedalam page
+export default connect(mapStateToProps, { fetchPage })(ExpDetailPage); // fetchpage dimasukan kedalam page

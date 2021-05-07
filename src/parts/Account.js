@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "elements/Button";
 import iconTrans from "assets/images/icons-operator/Transaction.svg";
 import iconDetailLight from "assets/images/icons-operator/Detail-dark.svg";
 import ModalTrans from "parts/ModalTrans";
@@ -100,7 +101,7 @@ class Account extends Component {
                           <img
                             alt=''
                             className='left mr-2'
-                            src={`${`https://admin-pocketlist.herokuapp.com`}/${acc.image}`}
+                            src={`${`http://localhost:3000`}/${acc.image}`}
                             style={{ width: "24px" }}
                           />
                           <span className="hidden-mobile">{acc.name} - </span>
@@ -124,7 +125,7 @@ class Account extends Component {
                                   alt=''
                                   style={{ width: "32px" }}
                                   className='left mr-2'
-                                  src={`${`https://admin-pocketlist.herokuapp.com`}/${account.accImageUrl}`}
+                                  src={`${`http://localhost:3000`}/${account.accImageUrl}`}
                                 />
                                 <span className="hidden-mobile">{account.accName} </span>
                               </div>
@@ -138,9 +139,9 @@ class Account extends Component {
                     </div>
                   </div>
                   <div className='col-lg-1 col'>
-                    <a href='/#' className='btn btn-block btn-warning' onClick={this.toggleAccount}>
+                    <Button href='/landingpage' type='link' className='btn btn-block btn-warning' onClick={this.toggleAccount}>
                       <img src={iconTrans} alt='Transaction'></img>
-                    </a>
+                    </Button>
                   </div>
 
                   <div className='col-lg-1 col'>

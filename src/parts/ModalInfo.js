@@ -1,44 +1,41 @@
-import React, { Component } from "react";
+import React, { useEffect, useContext} from "react";
 import Modal from "elements/Modal";
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/page";
+import AuthContext from "context/AuthContext"
 
-class ModalInfo extends Component {
+function ModalInfo(props) {
+    const { fetchPage, page } = props; 
 
-  refreshDetail = () => {
-    this.props.fetchPage(
-        `http://localhost:3000/api/v1/balanceinfo/5f6f68fc9fd56b291005a357`, "balanceInfo");
+    const { userId }  = useContext(AuthContext)
 
-  }
-  componentDidMount(){
-      this.refreshDetail();
-  }
-
-  render() {
-
-    const { page } = this.props; 
+    useEffect(() => {
+        // console.log(page)
+        fetchPage(
+            `http://localhost:3000/api/v1/balanceinfo/${userId}`, "balanceInfo");
+        
+    }, [fetchPage, userId])
 
     if (!page.hasOwnProperty("balanceInfo")) return null;
 
     // console.log(page.balanceInfo)
-
     return (
       <>
         <Modal
           title='Info'
-          sub-title={this.props.subTitle}
-          onCancel={this.props.onCancel}
-          modalVisible={this.props.modalVisible}
+          sub-title={props.subTitle}
+          onCancel={props.onCancel}
+          modalVisible={props.modalVisible}
           className='modalTrans'>
 
          
           <table className="table table-striped table-bordered mt-2">
-          <thead className="thead-orange">
+          <thead className="thead-brown">
               <tr>
                   <th className="text-center" colSpan="2">Debit</th>
               </tr>
           </thead>
-          <thead className="thead-dark">
+          <thead className="thead-orange">
               <tr>
                   <th className="text-center" width="60%">Account</th>
                   <th className="text-center">Nominal</th>
@@ -48,22 +45,22 @@ class ModalInfo extends Component {
           {
               page.balanceInfo.accDebit.map((accDebit,id) =>
               <tr key={id}>
-                  <td className="text-left"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${accDebit.accImageUrl}`}></img>&nbsp;&nbsp;{accDebit.accName}</td>
+                  <td className="text-left"><img alt="" width="32px" src={`${`http://localhost:3000`}/${accDebit.accImageUrl}`}></img>&nbsp;&nbsp;{accDebit.accName}</td>
                   <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(accDebit.balance) )}</td>
               </tr>
               )
           }
-          { <tr><td colSpan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumDebit) )}</td></tr> } 
+          { <tr><td colSpan="2" className="text-center font-weight-bold">Total : {("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumDebit) )}</td></tr> } 
           </tbody>
           </table>
 
           <table className="table table-striped table-bordered mt-2">
-          <thead className="thead-orange">
+          <thead className="thead-brown">
               <tr>
                   <th className="text-center" colSpan="2">Credit</th>
               </tr>
           </thead>
-          <thead className="thead-dark">
+          <thead className="thead-orange">
               <tr>
                   <th className="text-center" width="60%">Account</th>
                   <th className="text-center">Nominal</th>
@@ -73,19 +70,18 @@ class ModalInfo extends Component {
           {
               page.balanceInfo.accCredit.map((accCredit,id) =>
               <tr key={id}>
-                  <td className="text-left"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${accCredit.accImageUrl}`}></img>&nbsp;&nbsp;{accCredit.accName}</td>
+                  <td className="text-left"><img alt="" width="32px" src={`${`http://localhost:3000`}/${accCredit.accImageUrl}`}></img>&nbsp;&nbsp;{accCredit.accName}</td>
                   <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(accCredit.balance) )}</td>
               </tr>
               )
           }
-          { <tr><td colSpan="2" className="text-center font-weight-bold">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumCredit) )}</td></tr> } 
+          { <tr><td colSpan="2" className="text-center font-weight-bold">Total : {("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.balanceInfo.sumCredit) )}</td></tr> } 
           </tbody>
           </table>          
         </Modal>
       </>
     );
   }
-}
 
 const mapStateToProps = (state) => ({
   page: state.page,

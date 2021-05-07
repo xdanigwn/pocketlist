@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import iconDetail from "assets/images/icons-operator/Detail-white.svg";
 import ModalInfo from "parts/ModalInfo";
 import Button from "elements/Button";
+import moment from "moment";
 
  function PanelBalance(props) {
   const [textUpdated, setTextUpdated] = useState(false);
@@ -24,9 +25,8 @@ import Button from "elements/Button";
     });
     return ref.current;
   }
-
-
-  useEffect (() => {
+  
+  useEffect ( () => {
     // console.log(prevTotalRef)
     // JIKA ADA PERUBAHAN DATA, MAKA FADE IN
  
@@ -49,10 +49,10 @@ import Button from "elements/Button";
             <div className='card-header'>Balance</div>
             <div className='card-body main align-items-center text-center'>
               <h4 className={`card-text mt-4 mt-md-0 ${textUpdated ? "fade-effect" : ""}`}>Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.totaBalance)}</h4>
-              <span>{new Date().toJSON().slice(0, 10).split("-").reverse().join("/")}</span>
+              <span>Today : {moment().format("DD MMM YYYY")} </span>
             </div>
             <div className='card-footer text-right'>
-              <Button href='/' type='link' onClick={toggleBalance}>
+              <Button href='/landingpage' type='link' onClick={toggleBalance}>
                 <img src={iconDetail} alt='detail' />
               </Button>
             </div>

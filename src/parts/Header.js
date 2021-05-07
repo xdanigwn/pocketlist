@@ -2,6 +2,7 @@ import React from "react";
 import Button from "elements/Button";
 import IconLogo from "parts/IconLogo";
 import IconProfile from "parts/IconProfile";
+// import { Link } from "react-router-dom";
 // import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 export default function Header(props) {
@@ -22,8 +23,8 @@ export default function Header(props) {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav m-auto">
-                <li className={`nav-item${getNavLinkClass("/")}`}>
-                  <Button className="nav-link" type="link" href="/">
+                <li className={`nav-item${getNavLinkClass("/landingpage")}`}>
+                  <Button className="nav-link" type="link" href="/landingpage">
                     Overview
                   </Button>
                 </li>
@@ -36,14 +37,15 @@ export default function Header(props) {
                   >
                     Reports
                   </Button>
+                  
                 </li>
                 {/* <li className={`nav-item${getNavLinkClass("/settings")}`}>
                   <Button className="nav-link" type="link" href="/settings">
-                    Settings
+                    Settings  
                   </Button>
                 </li> */}
               </ul>
-              <div className="box-profile">
+              <div className="box-profile"><small><a href ="http://localhost:3000/api/v1/logout">Logout</a></small>&nbsp;
                 <IconProfile />
               </div>
             </div>

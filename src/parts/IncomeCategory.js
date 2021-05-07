@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
+import React, { useEffect, useContext} from 'react'
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/page";
+import AuthContext from "context/AuthContext"
 
-class IncomeCategory extends Component {
-    refreshDetail = () => {
-        this.props.fetchPage(
-            `http://localhost:3000/api/v1/reportincctg/5f6f68fc9fd56b291005a357`, "reportIncomeCategory");
+function IncomeCategory(props) {
+        const { fetchPage, page } = props
 
-    }
-    componentDidMount(){
-        this.refreshDetail();
-        // console.log(page)
-    }
-    render() {
-        const { page } = this.props; 
+        const { userId }  = useContext(AuthContext)
+
+        useEffect (() => {
+            const refreshDetail = () => {
+                fetchPage(
+                    `http://localhost:3000/api/v1/reportincctg/${userId}`, "reportIncomeCategory");
+        
+            }
+
+            refreshDetail();
+        }, [fetchPage, userId])
        
         if (!page.hasOwnProperty("reportIncomeCategory")) return null;
 
-        console.log(page.reportIncomeCategory)
+        // console.log(page.reportIncomeCategory)
         
         const totalIncome = page.reportIncomeCategory.transinc.reduce((transinc, x) => transinc + x.total, 0) // menghitung total didalam array dengan menggunakan fungsi reduce
 
@@ -51,7 +54,7 @@ class IncomeCategory extends Component {
             </>
         )
     }
-}
+
 
 const mapStateToProps = (state) => ({
     page: state.page,

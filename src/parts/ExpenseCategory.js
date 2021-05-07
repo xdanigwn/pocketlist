@@ -1,23 +1,28 @@
-import React, { Component } from 'react'
+import React, { useEffect, useContext} from 'react'
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/page";
+import AuthContext from "context/AuthContext"
 
-class ExpenseCategory extends Component {
-    refreshDetail = () => {
-        this.props.fetchPage(
-            `http://localhost:3000/api/v1/reportexpctg/5f6f68fc9fd56b291005a357`, "reportExpenseCategory");
+function ExpenseCategory(props) {
+        const { fetchPage, page } = props
 
-    }
-    componentDidMount(){
-        this.refreshDetail();
-        // console.log(page)
-    }
-    render() {
-        const { page } = this.props; 
+        const { userId }  = useContext(AuthContext)
+
+        useEffect (() => {
+            const refreshDetail = () => {
+                fetchPage(
+                    `http://localhost:3000/api/v1/reportexpctg/${userId}`, "reportExpenseCategory");
+        
+            }
+
+            refreshDetail();
+            // console.log(page)
+        }, [fetchPage, userId])
+   
        
         if (!page.hasOwnProperty("reportExpenseCategory")) return null;
 
-        console.log(page.reportExpenseCategory)
+        // console.log(page.reportExpenseCategory)
         
         const totalExpense = page.reportExpenseCategory.transexp.reduce((transexp, x) => transexp + x.total, 0) // menghitung total didalam array dengan menggunakan fungsi reduce
 
@@ -51,7 +56,6 @@ class ExpenseCategory extends Component {
             </>
         )
     }
-}
 
 const mapStateToProps = (state) => ({
     page: state.page,

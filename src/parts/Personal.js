@@ -21,6 +21,8 @@ function PanelPersonal(props) {
   const [dateFrom, setDateFrom] = useState(moment().startOf("month").format("YYYY-MM-DD"));
   const [dateTo, setDateTo] = useState(moment().format("YYYY-MM-DD"));
 
+  const { refreshPage } = props; 
+
   const toggleBalance = () => {
     setModalBalanceVis(prev => !prev);
   }
@@ -34,52 +36,41 @@ function PanelPersonal(props) {
   }
 
   useEffect (() => { // COMPDIDUPDATE FOR FUNCTION COMP => APABILA ADA PERUBAHAN PADA COMPONENT TERSEBUT
-    // const { data } = this.props;
-   
-    // JIKA ADA PERUBAHAN DATA, MAKA FADE IN
-    // if (prevProps.data.sumIncome !== data.sumIncome) {
-    //     this.setState({ incomeUpdated : !prevState.incomeUpdated }, () => {
-    //       setTimeout(() => { this.setState({ incomeUpdated: false }) }, 1000);
-    //     })
-    // }
-    // if (prevProps.data.sumExpense !== data.sumExpense) {
-    //   this.setState({ expenseUpdated : !prevState.expenseUpdated }, () => {
-    //     setTimeout(() => { this.setState({ expenseUpdated: false }) }, 1000);
-    //   })
-    // }
     
     if (prevIncRef !== undefined){
       if (prevIncRef !== props.data.sumIncome) {
         // console.log(prevTotalRef)
-       
         setIncUpdated(true) // UPDATE MENJADI STATUS TRUE = FADE EFFECT
-        setTimeout(() => { setIncUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
+      }else{
+        refreshPage(dateFrom, dateTo);
       }
-      // console.log(prevTextRef)
     }
     
     if (prevExpRef !== undefined){
       if (prevExpRef !== props.data.sumExpense) {
         // console.log(prevTotalRef)
-       
-        setExpUpdated(true) // UPDATE MENJADI STATUS TRUE = FADE EFFECT
-        setTimeout(() => { setExpUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
+        setExpUpdated(true) // UPDATE MENJADI STATUS TRUE = FADE EFFECT 
+      }else{
+        refreshPage(dateFrom, dateTo);
       }
-      // console.log(prevTextRef)
+    }
+    return () => {
+      setTimeout(() => { setIncUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
+      setTimeout(() => { setExpUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
     }
 
-  }, [ prevIncRef, prevExpRef, props.data.sumIncome, props.data.sumExpense]);
+  }, [ prevIncRef, prevExpRef, props.data.sumIncome, props.data.sumExpense, dateFrom, dateTo, refreshPage]);
 
     return (
       <div className='col-6 col-md-8 mt-3 no-paddingleft-mob no-paddingleft'>
         <div className='card bg-white text-dark'>
           <div className='card-header'>Personal</div>
-          <div className='card-body text-center main'>
+          <div className='card-body text-center main my-md-1'>
             <div className='row'>
-              <div className='col-md-6 mt-1'>
+              <div className='col-md-6'>
                 <div className='row'>
                   <div className='col'>
-                    <Link to={`/personalincdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} refreshPage={props.refreshPage}>
+                    <Link to={`/personalincdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} >
                       <img src={iconIncome} alt='income' />
                     </Link>
                   </div>
@@ -92,7 +83,7 @@ function PanelPersonal(props) {
               <div className='col-md-6 mt-1'>
                 <div className='row'>
                   <div className='col'>
-                    <Link to={`/personalexpdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} refreshPage={props.refreshPage}>
+                    <Link to={`/personalexpdtl/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`} >
                       <img src={iconExpense} alt='expense' />
                     </Link>
                   </div>
@@ -105,10 +96,10 @@ function PanelPersonal(props) {
             </div>
           </div>
           <div className='card-footer'>
-            <div className='float-left mt-2 ml-2'><small><i>Filter : {moment(dateFrom, 'YYYY-MM-DD').format("DD MMM YYYY")} - {moment(dateTo, 'YYYY-MM-DD').format("DD MMM YYYY")} </i></small></div>
+            <div className='float-left mt-2 ml-2'><i><small>Filter : {moment(dateFrom, 'YYYY-MM-DD').format("DD/MM/YYYY")} - {moment(dateTo, 'YYYY-MM-DD').format("DD/MM/YYYY")} </small></i></div>
             <div className='float-right'>
 
-              <Button href='/' type='link' onClick={toggleBalance}>
+              <Button href='/landingpage' type='link' onClick={toggleBalance}>
                 <img src={iconDate} alt='detail' />
               </Button>
 

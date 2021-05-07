@@ -122,7 +122,15 @@
     th {
       color: $table-dark-color;
       background-color: #fa991c;
-      border-color: #e48c19;
+      border-color: #fca533;
+    }
+  }
+
+  .thead-brown {
+    th {
+      color: $table-dark-color;
+      background-color: #836140;
+      border-color: #a0774e;
     }
   }
 

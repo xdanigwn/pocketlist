@@ -5,6 +5,7 @@ import moment from "moment";
 import NumberFormat from 'react-number-format'
 
 class TabExpense extends Component {
+  
   constructor(props) {
     super();
     this.state = {
@@ -15,7 +16,7 @@ class TabExpense extends Component {
         operator: "", // DIGENERATE LANGSUNG DI API = (-)
         accountId: "",
         categoryId: "",
-        userId: "5f6f68fc9fd56b291005a357",
+        userId: "",
       },
       ctg : {
         name : "",
@@ -28,12 +29,14 @@ class TabExpense extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     const { acc } = this.props;
     const { ctg } = this.props;
+    const { userId } = this.props;
     // console.log(acc._id);
     if (prevProps.acc._id !== acc._id) {
       this.setState({
         trans: {
           ...this.state.trans,
-          accountId: acc._id,
+          accountId: acc._id, // VALUE AWAL
+          userId: userId, // VALUE AWAL
           categoryId: ctg[0]._id
         },
         ctg: { // mengisi state dari props parent
@@ -84,7 +87,7 @@ class TabExpense extends Component {
       // alert("Data Tersimpan!");
       
       document.getElementById("Expform").reset();
-      this.props.refreshPage();
+      this.props.refreshPage(this.props.dateFrom,this.props.dateTo);
       this.props.onCancel();
     });
   };
@@ -133,7 +136,7 @@ class TabExpense extends Component {
                         <img
                         alt=''
                         className='left mr-2'
-                        src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.image}`}
+                        src={`${`http://localhost:3000`}/${ctg.image}`}
                         style={{ width: "24px" }}
                         />
                         <span>{ctg.name}</span>
@@ -156,7 +159,7 @@ class TabExpense extends Component {
                                 alt=''
                                 style={{ width: "32px" }}
                                 className='left mr-2'
-                                src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.ctgImageUrl}`}
+                                src={`${`http://localhost:3000`}/${ctg.ctgImageUrl}`}
                             />
                             <span> {ctg.ctgName} </span>
                             </div>
@@ -177,7 +180,7 @@ class TabExpense extends Component {
             </div>
         </div>
 
-        <button type='button' className='btn btn-secondary float-right' data-dismiss='modal' onClick={(e) => this.handleOnSubmit(e)}>
+        <button type='button' className='btn btn-secondary float-right mb-3' data-dismiss='modal' onClick={(e) => this.handleOnSubmit(e)}>
             Submit
         </button>
         </form>

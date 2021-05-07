@@ -1,131 +1,103 @@
-import React, { Component } from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { addTrans } from "store/actions/addtrans";
 import { fetchPage } from "store/actions/page";
 import moment from "moment";
 import NumberFormat from 'react-number-format'
 
-class TabTransfer extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      // STATE UNTUK PENYIMPANAN / ADDTRANS
-      trans: {
-        transDate: moment().format("YYYY-MM-DD"),
-        transDesc: "",
-        ammount: 0,
-        operator: "", // DIGENERATE LANGSUNG DI API = (-)
-        accountId: "",
-        categoryId: "5f76b4626d06cb30700703a6", // OTOMATIS CATEGORY TRANSFER. PADA COMP INI TIDAK ADA PERUBAHAN 
-        userId: "5f6f68fc9fd56b291005a357",
-        accountIdTo: ""
-      },
-      // STATE UNTUK DROPDOWN 
-      accDropDown : { 
-        id : "", // UNTUK MENGISI ACCOUNT TUJUAN
-        name : "",
-        image :""
-      }
-    };
-    
-  }
+function TabTransfer(props) {
+  // const [username , setUser ] = useState("");
+  // const { acc } = props;
+  const { page, acc, fetchPage, addTrans, onCancel } = props; 
+  const isHasAccDropDown = page.hasOwnProperty("accDropDown")
 
+  const [transDate , setTransDate ] = useState(moment().format("YYYY-MM-DD"));
+  const [transDesc , setTransDesc ] = useState("");
+  const [ammount , setAmmount ] = useState("");
+  const [operator  ] = useState(""); // DIGENERATE LANGSUNG DI API = (-)
+  const [accountId, setAccountId ] = useState("");
+  const [categoryId ] = useState("5f76b4626d06cb30700703a6"); // OTOMATIS CATEGORY TRANSFER. PADA COMP INI TIDAK ADA PERUBAHAN 
+  const [userId  ] = useState(props.userId);
+  const [accountIdTo , setAccountIdTo ] = useState("");
 
-  componentDidUpdate = (prevProps, prevState) => {
+  // STATE UNTUK DROPDOWN - UNTUK MENGISI ACCOUNT TUJUAN
+  const [accDropDownId , setAccDropDownId ] = useState("");
+  const [accDropDownName , setAccDropDownName ] = useState("");
+  const [accDropDownImage , setAccDropDownImage ] = useState("");
+
+  // MULTIPLE USE EFFECT IS FOR DIFFERENT PURPOSE
+  useEffect (() => {
     // STATE DI DESTRUCTURE PADA SAAT COMP DID UPDATE
-    const { acc } = this.props;
-    const { page } = this.props; 
-    const { accDropDown } = this.state; 
-    
-    // if (prevProps.acc._id !== acc.id){ // AGAR DI SEARCH HANYA SAAT ADA PERUBAHAN ID
-      this.props.fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/accountdd/${acc._id}`, "accDropDown" );
-    // }
+    if (acc._id !== undefined){
+      setAccountId(acc._id)
+      fetchPage(`http://localhost:3000/api/v1/accountdd/${userId}/${acc._id}`, "accDropDown"); // FILL PAGE & HASDROPDOWN
+    };
+  }, [
+    acc._id,
+    fetchPage,
+    userId
+  ]);
+
+  useEffect (() => {
+    // console.log(page)     
+    if(isHasAccDropDown){
      
-    //JALANKAN JIKA STATE MASIH AWAL / KOSONG DAN ACCROPDOWN SUDAH TERISI
-    if (accDropDown.name === "" && page.hasOwnProperty("accDropDown")) {
-      // console.log(page)
-      this.setState({
-        trans: { // MENGISI STATE DENGAN 
-          ...this.state.trans,
-          accountId: acc._id,
-          accountIdTo: page.accDropDown.accTransfer[0]._id
-        },
-        accDropDown: { // MENGISI STATE DENGAN DATA PERTAMA. MUNCUL PADA DROPDOWN
-          ...this.state.accDropDown,
-          id : page.accDropDown.accTransfer[0]._id,
-          name: page.accDropDown.accTransfer[0].accName,
-          image: page.accDropDown.accTransfer[0].accImageUrl,
-        }
-      })
+      setAccountIdTo(page.accDropDown.accTransfer[0]._id)
+          
+      setAccDropDownId(page.accDropDown.accTransfer[0]._id);
+      setAccDropDownName(page.accDropDown.accTransfer[0].accName);
+      setAccDropDownImage(page.accDropDown.accTransfer[0].accImageUrl);
     }
-    // console.log(accDropDown)
-  };
-
-  handleChange = (e) => {
-    // alert(e.target.name);
-    this.setState({
-      trans: {
-        ...this.state.trans,
-        [e.target.name]: e.target.value.replace(/,/g,''), //remove comma
-      },
-    });
-    // console.log(this.state.trans.transDate)
-  };
-
-  selectCategory = (e) => {
+  }, [isHasAccDropDown, page]) // PAGE SUDAH DIISI PADA USE EFE
+  
+  const selectCategory = (e) => {
     // JIKA ADA PERUBAHAN DROPDWON
-
-    this.setState({
-      ...this.state,
-      trans: { // MENGISI STATE DENGAN 
-        ...this.state.trans,
-        accountIdTo : e.currentTarget.getAttribute("data-id")
-      },
-      accDropDown: {
-        ...this.state.accDropDown,
-        id: e.currentTarget.getAttribute("data-id"),
-        name: e.currentTarget.getAttribute("data-name"),
-        image: e.currentTarget.getAttribute("data-image"),
-      },
-    });
-    // console.log(this.state.accTrf)
+    // fetchPage(`http://localhost:3000/api/v1/accountdd/${acc._id}`, "accDropDown");
+    // console.log("change")
+    setAccountIdTo(e.currentTarget.getAttribute("data-id"))
+    setAccDropDownId(e.currentTarget.getAttribute("data-id"));
+    setAccDropDownName(e.currentTarget.getAttribute("data-name"));
+    setAccDropDownImage(e.currentTarget.getAttribute("data-image"));
   };
 
-  handleOnSubmit = (e) => {
-    const { trans } = this.state;
-
+  const handleOnSubmit = (e) => {
+    const trans = { 
+       transDate, 
+       transDesc, 
+       ammount, 
+       operator, 
+       accountId, 
+       categoryId, 
+       userId, 
+       accountIdTo };
     console.log(trans);
-    this.props.addTrans(trans).then(() => {
-    // alert("Data Tersimpan!");
-      
+    addTrans(trans).then(() => {
+      // alert("Data Tersimpan!");
+        
       document.getElementById("trfFrom").reset();
-      this.props.refreshPage();
-      this.props.onCancel();
+      fetchPage(`http://localhost:3000/api/v1/accountdd/${acc._id}`, "accDropDown");
+      onCancel();
     });
   };
 
-  render() {
-    const { acc } = this.props;
-    const { page } = this.props; 
-    const { accDropDown } = this.state; 
+  
 
-    // console.log(page);
-
-    // JIKA BUKAN PAGE ACC DROPDOWN TIDAK PERLU DIRENDER
-    if (!page.hasOwnProperty("accDropDown")) return null;
+  // if(page.hasOwnProperty("accDropDown")){ console.log(acc._id); console.log("ITEM DD PERTAMA : " + accDropDownName); console.log(page);};
+  if (!isHasAccDropDown) return null;
+  // console.log(page)
 
     return (
       <>
-        <form id='trfFrom' method='POST' onSubmit={this.handleOnSubmit}>
+        <form id='trfFrom' method='POST' onSubmit={handleOnSubmit}>
             <div className='col-9'>
-              <input type='hidden' className='form-control' id='accountId' name='accountId' onChange={this.handleChange} defaultValue={acc._id} />
+              <input type='hidden' className='form-control' id='accountId' name='accountId' onChange={(e) => setAccountId(e.target.value)} defaultValue={acc._id} />
             </div>
             <div className='form-group row'>
                 <label htmlFor='transDate' className='col-3 col-form-label '>
                 Date
                 </label>
                 <div className='col-9'>
-                <input type='date' className='form-control' id='transDate' name='transDate' onChange={this.handleChange} value={this.state.trans.transDate} />
+                <input type='date' className='form-control' id='transDate' name='transDate' value={transDate} onChange={(e) => setTransDate(e.target.value)} />
                 </div>
             </div>
             <div className='form-group row'>
@@ -134,7 +106,7 @@ class TabTransfer extends Component {
                 </label>
                 <div className='col-9'>
                 {/* <input type='number' className='form-control' id='ammount' name='ammount' onChange={this.handleChange} /> */}
-                <NumberFormat className='form-control' thousandSeparator={true} id='ammount' name="ammount" onChange={this.handleChange} />
+                <NumberFormat className='form-control' thousandSeparator={true} id='ammount' name="ammount" value={ammount} onChange={(e) => setAmmount(e.target.value.replace(/,/g,''))} />
                 </div>
             </div>
             <div className='form-group row'>
@@ -153,24 +125,24 @@ class TabTransfer extends Component {
                         {/* DEFAULT STATE */}
                         <div className='badge'>
                             <img
-                            alt=''
+                            alt={accDropDownId}
                             className='left mr-2'
-                            src={`${`https://admin-pocketlist.herokuapp.com`}/${accDropDown.image}`}
+                            src={`${`http://localhost:3000`}/${accDropDownImage}`}
                             style={{ width: "24px" }}
                             />
-                            <span>{accDropDown.name}</span>
+                            <span>{accDropDownName}</span>
                         </div>
                         </button>
                         <ul className='dropdown-menu ' aria-labelledby='dropdownMenu2' style={{ width: "100%" }}>
 
                         {/* ACCDROPDOWN = NAMA FETCHNYA. ACCTRANSFER = VAR YG DILEMPAR DI CONTROLLER */}
-                        {page.accDropDown.accTransfer.map((acc, _id) => {
+                           {page.accDropDown.accTransfer.map((acc, _id) => {
                             return (
                             <li
                                 key={acc._id}
                                 href='/#'
                                 className='dropdown-item d-flex justify-content-between'
-                                onClick={this.selectCategory}
+                                onClick={selectCategory}
                                 data-id={acc._id}
                                 data-name={acc.accName}
                                 data-image={acc.accImageUrl}
@@ -180,7 +152,7 @@ class TabTransfer extends Component {
                                     alt=''
                                     style={{ width: "32px" }}
                                     className='left mr-2'
-                                    src={`${`https://admin-pocketlist.herokuapp.com`}/${acc.accImageUrl}`}
+                                    src={`${`http://localhost:3000`}/${acc.accImageUrl}`}
                                 />
                                 <span> {acc.accName} </span>
                                 </div>
@@ -197,18 +169,17 @@ class TabTransfer extends Component {
                 Desc
                 </label>
                 <div className='col-9'>
-                <textarea className='form-control' id='transDesc' name='transDesc' rows='3' onChange={this.handleChange}></textarea>
+                <textarea className='form-control' id='transDesc' name='transDesc' rows='3' value={transDesc} onChange={(e) => setTransDesc(e.target.value)}></textarea>
                 </div>
             </div>
 
-            <button type='button' className='btn btn-secondary float-right' data-dismiss='modal' onClick={(e) => this.handleOnSubmit(e)}>
+            <button type='button' className='btn btn-secondary float-right mb-3' data-dismiss='modal' onClick={(e) => handleOnSubmit(e)}>
                 Submit
             </button>
         </form>
       </>
     );
   }
-}
 
 const mapStateToProps = (state) => ({
   page: state.page,

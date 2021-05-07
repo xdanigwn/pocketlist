@@ -47,7 +47,7 @@ function ModalDate(props) {
                 </div>
               </div>
 
-              <button type='button' className='btn btn-secondary float-right' data-dismiss='modal' onClick={(e) => handleOnSubmit(e)}>
+              <button type='button' className='btn btn-secondary float-right mb-3' data-dismiss='modal' onClick={(e) => handleOnSubmit(e)}>
                   Submit
               </button>
             </form>

@@ -28,6 +28,7 @@ class TabIncome extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     const { acc } = this.props;
     const { ctg } = this.props;
+    const { userId } = this.props;
     // console.log(ctg);
     if (prevProps.acc._id !== acc._id) {
       // mengisi state dari props parent
@@ -35,6 +36,7 @@ class TabIncome extends Component {
         trans: {
           ...this.state.trans,
           accountId: acc._id,
+          userId: userId, // VALUE AWAL
           categoryId: ctg[0]._id,
         },
         ctg: { 
@@ -79,7 +81,7 @@ class TabIncome extends Component {
       // alert("Data Tersimpan!");
       
       document.getElementById("Incform").reset();
-      this.props.refreshPage();
+      this.props.refreshPage(this.props.dateFrom,this.props.dateTo);
       this.props.onCancel();
     });
   };
@@ -127,7 +129,7 @@ class TabIncome extends Component {
                     <img
                     alt=''
                     className='left mr-2'
-                    src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.image}`}
+                    src={`${`http://localhost:3000`}/${ctg.image}`}
                     style={{ width: "24px" }}
                     />
                     <span>{ctg.name}</span>
@@ -150,7 +152,7 @@ class TabIncome extends Component {
                             alt=''
                             style={{ width: "32px" }}
                             className='left mr-2'
-                            src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.ctgImageUrl}`}
+                            src={`${`http://localhost:3000`}/${ctg.ctgImageUrl}`}
                         />
                         <span> {ctg.ctgName} </span>
                         </div>
@@ -171,7 +173,7 @@ class TabIncome extends Component {
             </div>
         </div>
 
-        <button type='button' className='btn btn-secondary float-right' data-dismiss='modal' onClick={(e) => this.handleOnSubmit(e)}>
+        <button type='button' className='btn btn-secondary float-right mb-3' data-dismiss='modal' onClick={(e) => this.handleOnSubmit(e)}>
             Submit
         </button>
         </form>

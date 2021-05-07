@@ -4,7 +4,7 @@ import logo from 'assets/images/Logo-orange.png';
 
 export default function IconLogo() {
     return (
-        <Button href="" type="link"> 
+        <Button href="/landingpage" type="link"> 
             <img className="brand-logo-icon" src={logo} alt="pocketlist-logo" ></img>
         </Button>
     )

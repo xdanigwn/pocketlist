@@ -32,7 +32,7 @@ export default function Modal(props) {
                 </button>
               </div>
               <div className="modal-body">{props.children}</div>
-              <div className="modal-footer">
+              {/* <div className="modal-footer">
                 {props.hasConfirm && (
                   <button
                     type="button"
@@ -43,7 +43,7 @@ export default function Modal(props) {
                     Submit
                   </button>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
