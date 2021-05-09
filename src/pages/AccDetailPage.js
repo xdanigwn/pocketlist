@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
     useEffect (() => {
         const refreshDetail = () => {
-            fetchPage(`http://localhost:3000/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage");
+            fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage");
         };
 
         refreshDetail();
@@ -21,8 +21,8 @@ import { Link } from "react-router-dom";
 
     const handlerDelete = async (e) => {    
         // e.preventDefault();
-        props.fetchPage(`http://localhost:3000/api/v1/deltrans/${e.currentTarget.getAttribute("data-id")}`, "DeleteTrans");
-        props.fetchPage(`http://localhost:3000/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage"); props.fetchPage(`http://localhost:3000/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage");
+        props.fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/deltrans/${e.currentTarget.getAttribute("data-id")}`, "DeleteTrans");
+        props.fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage"); props.fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/accountdtl/${match.params.id_account}`, "accountDetailPage");
     }
     
     if (!page.hasOwnProperty("accountDetailPage")) return null;

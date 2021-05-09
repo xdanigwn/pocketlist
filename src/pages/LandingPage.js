@@ -24,7 +24,7 @@ function LandingPage(props) {
     const refreshPage = useCallback(
       (dateFrom, dateTo) => {
         // console.log(userId)
-        fetchPage(`http://localhost:3000/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
+        fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
       },
       [fetchPage, userId],
     );
@@ -42,9 +42,11 @@ function LandingPage(props) {
     // }, [refreshPage])
 
   }, [refreshPage, userId])
-  // console.log(page)
+    
+    // console.log(loggedIn)
+    // if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
     if (!page.hasOwnProperty("landingPage")) return null;
-    if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
+    if (loggedIn === false) return Redirect("/")
     // console.log(page.landingPage.accTransfer)
 
     return (
