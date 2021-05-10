@@ -18,7 +18,7 @@ import { Redirect } from 'react-router';
         const refreshDetail = () => {
             if(userId){
                 fetchPage(
-                    `https://admin-pocketlist.herokuapp.com/api/v1/authcheckpersonalexpdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalExpDtlPage");
+                    `https://admin-pocketlist.herokuapp.com/api/v1/personalexpdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalExpDtlPage");
             }
             
     

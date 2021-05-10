@@ -11,7 +11,7 @@ function ExpenseCategory(props) {
         useEffect (() => {
             const refreshDetail = () => {
                 fetchPage(
-                    `https://admin-pocketlist.herokuapp.com/api/v1/authcheckreportexpctg/${userId}`, "reportExpenseCategory");
+                    `https://admin-pocketlist.herokuapp.com/api/v1/reportexpctg/${userId}`, "reportExpenseCategory");
         
             }
 

@@ -11,7 +11,7 @@ function IncomeCategory(props) {
         useEffect (() => {
             const refreshDetail = () => {
                 fetchPage(
-                    `https://admin-pocketlist.herokuapp.com/api/v1/authcheckreportincctg/${userId}`, "reportIncomeCategory");
+                    `https://admin-pocketlist.herokuapp.com/api/v1/reportincctg/${userId}`, "reportIncomeCategory");
         
             }
 

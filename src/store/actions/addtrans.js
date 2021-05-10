@@ -11,7 +11,7 @@ import axios from "axios";
 export const addTrans = (transObj) => {
   // return (dispatch) => {
   //   axios
-  //     .post(`https://admin-pocketlist.herokuapp.com/api/v1/authcheckadd-trans`, payload)
+  //     .post(`https://admin-pocketlist.herokuapp.com/api/v1/add-trans`, payload)
   //     .then((response) => {
   //       // console.log(response);
   //       dispatch({
@@ -24,7 +24,7 @@ export const addTrans = (transObj) => {
   return (dispatch) => {
     return axios
       .post(
-        `https://admin-pocketlist.herokuapp.com/api/v1/authcheckaddtrans`,
+        `https://admin-pocketlist.herokuapp.com/api/v1/addtrans`,
         transObj,
         {
           headers: {

@@ -16,7 +16,7 @@ function IncDetailPage (props){
 
     useEffect (() => {
         if(userId){
-            const refreshDetail = () => fetchPage( `https://admin-pocketlist.herokuapp.com/api/v1/authcheckpersonalincdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalIncDtlPage");
+            const refreshDetail = () => fetchPage( `https://admin-pocketlist.herokuapp.com/api/v1/personalincdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalIncDtlPage");
             refreshDetail();
         } 
         // console.log(match)
