@@ -30,7 +30,7 @@ function TabTransfer(props) {
     // STATE DI DESTRUCTURE PADA SAAT COMP DID UPDATE
     if (acc._id !== undefined){
       setAccountId(acc._id)
-      fetchPage(`http://localhost:3000/api/v1/accountdd/${userId}/${acc._id}`, "accDropDown"); // FILL PAGE & HASDROPDOWN
+      fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/authcheckaccountdd/${userId}/${acc._id}`, "accDropDown"); // FILL PAGE & HASDROPDOWN
     };
   }, [
     acc._id,
@@ -52,7 +52,7 @@ function TabTransfer(props) {
   
   const selectCategory = (e) => {
     // JIKA ADA PERUBAHAN DROPDWON
-    // fetchPage(`http://localhost:3000/api/v1/accountdd/${acc._id}`, "accDropDown");
+    // fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/authcheckaccountdd/${acc._id}`, "accDropDown");
     // console.log("change")
     setAccountIdTo(e.currentTarget.getAttribute("data-id"))
     setAccDropDownId(e.currentTarget.getAttribute("data-id"));
@@ -75,7 +75,7 @@ function TabTransfer(props) {
       // alert("Data Tersimpan!");
         
       document.getElementById("trfFrom").reset();
-      fetchPage(`http://localhost:3000/api/v1/accountdd/${acc._id}`, "accDropDown");
+      fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/authcheckaccountdd/${acc._id}`, "accDropDown");
       onCancel();
     });
   };

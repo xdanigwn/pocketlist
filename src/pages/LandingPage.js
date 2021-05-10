@@ -24,7 +24,7 @@ function LandingPage(props) {
     const refreshPage = useCallback(
       (dateFrom, dateTo) => {
         // console.log(userId)
-        fetchPage(`http://localhost:3000/api/v1/overview/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`, "landingPage");
+        fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/authcheckoverview/5f6f68fc9fd56b291005a357/${dateFrom}/${dateTo}`, "landingPage");
       },
       [fetchPage],
     );
