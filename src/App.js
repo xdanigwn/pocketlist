@@ -8,14 +8,14 @@ import IncDetailPage from 'pages/IncDetailPage';
 import ExpDetailPage from 'pages/ExpDetailPage';
 
 import { AuthContextProvider } from "context/AuthContext";
-import axios from "axios";
+// import axios from "axios";
 
 // import SettingsPage from 'pages/SettingsPage';
 import "assets/scss/style.scss"
 
-function App() {
+// axios.defaults.withCredentials = true // SET TO ALLOW COOKIES SENT TO FRONT END BY SERVER 
 
-  axios.defaults.withCredentials = true // SET TO ALLOW COOKIES SENT TO FRONT END BY SERVER 
+function App() {
   
   return (
     
