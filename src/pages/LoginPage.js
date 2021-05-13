@@ -18,9 +18,11 @@ function LoginPage()  {
                 pass
             };
 
-            await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, { withCredentials: true }, {headers: {
-                'Access-Control-Allow-Origin': true,
-              }})
+            await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, { withCredentials: true }, 
+            {headers: {
+                'Access-Control-Allow-Origin': "https://app-pocketlist.herokuapp.com",
+                'Access-Control-Allow-Credentials' : "true",
+            }})
             // alert(res.data);
             .then((res) => {
                 if ((res.data === "Username tidak ada!") || (res.data === "Password syalah!")){
