@@ -29,6 +29,7 @@ function LandingPage(props) {
         // if(!didMount){
           fetchPage(`http://localhost:3000/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
         // }
+        
       },
       [ fetchPage, 
         userId,
