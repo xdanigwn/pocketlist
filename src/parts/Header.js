@@ -60,7 +60,7 @@ export default function Header(props) {
               </ul>
               <div className="box-profile"><small><button className="btn btn-primary btn-user btn-small" onClick={Logout}>Logout</button></small>&nbsp;
                 {/* <IconProfile /> */}
-                Welcome, {name}
+                Welcome, {name} 
               </div>
             </div>
           </nav>
