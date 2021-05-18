@@ -15,7 +15,7 @@ function LoginPage()  {
 
     // async function Actlogout(e) {
     //     e.preventDefault();
-    //     await axios.get("http://localhost:3000/api/v1/logout" )
+    //     await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/logout" )
     //     .then((res) => {
     //         // console.log(res.data);
     //     })
@@ -23,7 +23,7 @@ function LoginPage()  {
 
     // async function getCookies(e) {
     //     e.preventDefault();
-    //     await axios.get("http://localhost:3000/api/v1/authcheck" )
+    //     await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/authcheck" )
     //     .then((res) => {
     //         console.log(res.data)
     //         setDataCookie(res.data)
@@ -39,13 +39,13 @@ function LoginPage()  {
                 password
             };
 
-            // await axios.post("http://localhost:3000/api/v1/login", loginData, {withCredentials: true})
+            // await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, {withCredentials: true})
             // alert(res.data);
             axios({
                 method: "POST",
                 data: loginData,
                 withCredentials: true,
-                url: "http://localhost:3000/api/v1/login",
+                url: "https://admin-pocketlist.herokuapp.com/api/v1/login",
             }).then(async (res) => {
                 // if ((res.data === "Username tidak ada!") || (res.data === "Password syalah!")){
                 if (res.data === "Successfully Authenticated"){

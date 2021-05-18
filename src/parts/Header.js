@@ -16,7 +16,7 @@ export default function Header(props) {
 
   async function Logout(e) {
     // e.preventDefault();
-    await axios.get("http://localhost:3000/api/v1/logout" )
+    await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/logout" )
     .then(() => {
       history.push("/");
     })

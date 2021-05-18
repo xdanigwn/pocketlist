@@ -27,7 +27,7 @@ function LandingPage(props) {
       (dateFrom, dateTo) => {
         // console.log(userId)
         // if(!didMount){
-          fetchPage(`http://localhost:3000/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
+          fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
         // }
         
       },
