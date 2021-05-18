@@ -7,20 +7,15 @@ import LoginPage from 'pages/LoginPage';
 // import IncDetailPage from 'pages/IncDetailPage';
 // import ExpDetailPage from 'pages/ExpDetailPage';
 
-<<<<<<< HEAD
 // import { AuthContextProvider } from "context/AuthContext";
 import axios from "axios";
-=======
-import { AuthContextProvider } from "context/AuthContext";
-// import axios from "axios";
->>>>>>> f6f7e973e4fb70c3130e7d952b72bbe9b0feaeb4
 
 // import SettingsPage from 'pages/SettingsPage';
 import "assets/scss/style.scss"
 
-// axios.defaults.withCredentials = true // SET TO ALLOW COOKIES SENT TO FRONT END BY SERVER 
-
 function App() {
+
+  axios.defaults.withCredentials = true // SET TO ALLOW COOKIES SENT TO FRONT END BY SERVER 
   
   return (
     
