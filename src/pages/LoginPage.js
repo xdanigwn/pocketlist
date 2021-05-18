@@ -1,32 +1,50 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react'
-import AuthContext from "context/AuthContext"
+import React, { useState, 
+    // useContext 
+} from 'react'
+// import AuthContext from "context/AuthContext"
 import { useHistory } from 'react-router';
 
 function LoginPage()  {
     const [username , setUser ] = useState("");
-    const [pass , setPass ] = useState("");
+    const [password , setPass ] = useState("");
+    const [dataCookie, setDataCookie] = useState(null);
 
-    const { getLoggedIn }  = useContext(AuthContext)
+    // const { getLoggedIn }  = useContext(AuthContext)
     const history = useHistory();
+
+    async function getCookies(e) {
+        e.preventDefault();
+        await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/authcheck" )
+        .then((res) => {
+            setDataCookie(res.data)
+            console.log(res.data)
+        })
+    }
 
     async function submitLogin(e) {
         e.preventDefault();
         try {
             const loginData = {
                 username,
-                pass
+                password
             };
 
-            await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData)
+            // await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, {withCredentials: true})
             // alert(res.data);
-            .then((res) => {
-                if ((res.data === "Username tidak ada!") || (res.data === "Password syalah!")){
-                    return alert(res.data)
-                } 
+            axios({
+                method: "POST",
+                data: loginData,
+                withCredentials: true,
+                url: "https://admin-pocketlist.herokuapp.com/api/v1/login",
+            }).then((res) => {
+                // if ((res.data === "Username tidak ada!") || (res.data === "Password syalah!")){
+                    console.log(res)
+                // } 
             })
-            await getLoggedIn();
-            history.push("/landingpage")
+            
+            // await getLoggedIn();
+            // history.push("/landingpage")
             // Redirect("http://localhost:3001/landingpage")
         } catch (err) {
             console.error(err)
@@ -65,13 +83,16 @@ function LoginPage()  {
                                                 className="form-control 
                                                 form-control-user" 
                                                 id="exampleInputPassword"
-                                                name="pass" placeholder="Password"></input>
+                                                name="password" placeholder="Password"></input>
                                         </div>
 
                                         <button type="submit" className="btn btn-primary btn-user btn-block" >
                                         Login
                                         </button>
-
+                                        <button onClick={getCookies} className="btn btn-primary btn-user btn-block" >
+                                        Get Cookies
+                                        </button>
+                                        {dataCookie ? <h1>Welcome Back {dataCookie.username}</h1> : null}
                                     </form>
                                     </div>
                                 </div>
