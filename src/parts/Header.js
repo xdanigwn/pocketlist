@@ -63,9 +63,6 @@ export default function Header(props) {
                 {/* <IconProfile /> */}
                 <span className="mt-3"><small>Welcome, {name} </small></span>&nbsp;&nbsp;
                 <button className="btn btn-primary btn-user btn-logout" onClick={Logout}>Logout</button>
-                
-             
-            
               </div>
             </div>
           </nav>
