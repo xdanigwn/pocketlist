@@ -20,7 +20,7 @@ import { fetchPage } from "store/actions/page";
 function LandingPage(props) {
     const [didMount, setDidMount] = useState(false);  // TO PREVENT COMPONENT RENDER BEFORE FILL THE PROPS PAGE
     const { page, fetchPage} = props;
-    const { userId }  = useContext(AuthContext)
+    const { userId, name }  = useContext(AuthContext)
     // const history = useHistory();
    
     const refreshPage = useCallback(
@@ -41,7 +41,7 @@ function LandingPage(props) {
       // alert(loggedIn);   
 
       if(userId){
-          // console.log(didMount);
+          console.log(name);
           refreshPage(moment().startOf("month").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD"));  // SET FIRST LOAD WITH FIRST DATE OF MONTH - NOW DATE
           setDidMount(true);
       }

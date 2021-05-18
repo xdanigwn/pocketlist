@@ -262,9 +262,9 @@ header {
       }
     }
     .box-profile {
-      width: 160px;
+      width: 200px;
       text-align: right;
-
+      font-size: 0.8rem;
       img {
         &:hover {
           border: 1px solid $gray-500;
@@ -276,6 +276,10 @@ header {
       @media (max-width: 992px) {
         width: 0px;
         margin-top: 10px;
+      }
+
+      .btn-logout{
+        font-size: 12px;
       }
     }
   }

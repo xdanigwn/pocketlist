@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "elements/Button";
 import IconLogo from "parts/IconLogo";
 import IconProfile from "parts/IconProfile";
@@ -23,6 +23,7 @@ export default function Header(props) {
     })
   }
 
+  console.log(name);
   return (
     <div>
       <header className="spacing-sm">
@@ -58,9 +59,13 @@ export default function Header(props) {
                   </Button>
                 </li> */}
               </ul>
-              <div className="box-profile"><small><button className="btn btn-primary btn-user btn-small" onClick={Logout}>Logout</button></small>&nbsp;
+              <div className="box-profile">
                 {/* <IconProfile /> */}
-                Welcome, {name} 
+                <span className="mt-3"><small>Welcome, {name} </small></span>&nbsp;&nbsp;
+                <button className="btn btn-primary btn-user btn-logout" onClick={Logout}>Logout</button>
+                
+             
+            
               </div>
             </div>
           </nav>
