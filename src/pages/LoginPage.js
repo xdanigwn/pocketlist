@@ -30,7 +30,15 @@ function LoginPage()  {
                 password
             };
 
+<<<<<<< HEAD
             // await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, {withCredentials: true})
+=======
+            await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, { withCredentials: true }, 
+            {headers: {
+                'Access-Control-Allow-Origin': "https://app-pocketlist.herokuapp.com",
+                'Access-Control-Allow-Credentials' : "true",
+            }})
+>>>>>>> f6f7e973e4fb70c3130e7d952b72bbe9b0feaeb4
             // alert(res.data);
             axios({
                 method: "POST",
