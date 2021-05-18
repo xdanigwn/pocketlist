@@ -12,13 +12,13 @@ import { Redirect } from 'react-router';
  function ExpDetailPage (props){
     const { fetchPage, match, page} = props
 
-    const { loggedIn, userId }  = useContext(AuthContext)
+    const { userId }  = useContext(AuthContext)
     
     useEffect (() => {
         const refreshDetail = () => {
             if(userId){
                 fetchPage(
-                    `https://admin-pocketlist.herokuapp.com/api/v1/personalexpdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalExpDtlPage");
+                    `http://localhost:3000/api/v1/personalexpdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalExpDtlPage");
             }
             
     
@@ -26,9 +26,9 @@ import { Redirect } from 'react-router';
         refreshDetail();
     }, [fetchPage, match, userId])
 
-    
+    // console.log(userId)
+    if (userId === undefined) return Redirect("/")
     if (!page.hasOwnProperty("personalExpDtlPage")) return null;
-    if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
     // console.log(page.personalExpDtlPage)
     
     return(

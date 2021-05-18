@@ -12,7 +12,7 @@ function ModalInfo(props) {
     useEffect(() => {
         // console.log(page)
         fetchPage(
-            `https://admin-pocketlist.herokuapp.com/api/v1/balanceinfo/${userId}`, "balanceInfo");
+            `http://localhost:3000/api/v1/balanceinfo/${userId}`, "balanceInfo");
         
     }, [fetchPage, userId])
 

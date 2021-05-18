@@ -9,7 +9,7 @@ import iconExpense from "assets/images/icons-overview/Expense.svg";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-function PanelPersonal(props) {
+function Personal(props) {
   
   const [incomeUpdated, setIncUpdated] = useState(false);
   const [expenseUpdated, setExpUpdated] = useState(false);
@@ -55,8 +55,8 @@ function PanelPersonal(props) {
       }
     }
     return () => {
-      setTimeout(() => { setIncUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
-      setTimeout(() => { setExpUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
+      setTimeout(() => { setIncUpdated(false) }, 3000); // KEMBALIKAN KE STATUS FALSE
+      setTimeout(() => { setExpUpdated(false) }, 3000); // KEMBALIKAN KE STATUS FALSE
     }
 
   }, [ prevIncRef, prevExpRef, props.data.sumIncome, props.data.sumExpense, dateFrom, dateTo, refreshPage]);
@@ -123,4 +123,4 @@ function PanelPersonal(props) {
 }
 
 
-export default PanelPersonal;
+export default Personal;

@@ -2,13 +2,25 @@ import React from "react";
 import Button from "elements/Button";
 import IconLogo from "parts/IconLogo";
 import IconProfile from "parts/IconProfile";
+import axios from 'axios';
+import { useHistory } from 'react-router';
 // import { Link } from "react-router-dom";
 // import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 export default function Header(props) {
+  const history = useHistory();
+
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? " active" : "";
   };
+
+  async function Logout(e) {
+    // e.preventDefault();
+    await axios.get("http://localhost:3000/api/v1/logout" )
+    .then(() => {
+      history.push("/");
+    })
+  }
 
   return (
     <div>
@@ -45,7 +57,7 @@ export default function Header(props) {
                   </Button>
                 </li> */}
               </ul>
-              <div className="box-profile"><small><a href ="https://admin-pocketlist.herokuapp.com/api/v1/logout">Logout</a></small>&nbsp;
+              <div className="box-profile"><small><button className="btn btn-primary btn-user btn-small" onClick={Logout}>Logout</button></small>&nbsp;
                 <IconProfile />
               </div>
             </div>

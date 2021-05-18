@@ -4,7 +4,7 @@ import ModalInfo from "parts/ModalInfo";
 import Button from "elements/Button";
 import moment from "moment";
 
- function PanelBalance(props) {
+ function Balance(props) {
   const [textUpdated, setTextUpdated] = useState(false);
   const [modalBalanceVis, setModalBalanceVis] = useState(false);
   const prevTotalRef = usePrevious(props.data.totaBalance) // Menyimpan nilai lama total balance
@@ -35,7 +35,7 @@ import moment from "moment";
         // console.log(prevTotalRef)
        
         setTextUpdated(true) // UPDATE MENJADI STATUS TRUE = FADE EFFECT
-        setTimeout(() => { setTextUpdated(false) }, 2000); // KEMBALIKAN KE STATUS FALSE
+        setTimeout(() => { setTextUpdated(false) }, 3000); // KEMBALIKAN KE STATUS FALSE
       }
       // console.log(prevTextRef)
     }
@@ -73,4 +73,4 @@ import moment from "moment";
   }
 
 
-export default PanelBalance;
+export default Balance;

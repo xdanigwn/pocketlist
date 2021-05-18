@@ -12,19 +12,19 @@ import { Redirect } from 'react-router';
 function IncDetailPage (props){
     const { fetchPage, match, page} = props
 
-    const { loggedIn, userId }  = useContext(AuthContext)
+    const { userId }  = useContext(AuthContext)
 
     useEffect (() => {
         if(userId){
-            const refreshDetail = () => fetchPage( `https://admin-pocketlist.herokuapp.com/api/v1/personalincdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalIncDtlPage");
+            const refreshDetail = () => fetchPage( `http://localhost:3000/api/v1/personalincdtl/${userId}/${match.params.dateFrom}/${match.params.dateTo}`, "personalIncDtlPage");
             refreshDetail();
         } 
         // console.log(match)
     }, [fetchPage, match, userId]) // dependency = jika  value berubah, maka action di use effect dijalankan
 
-  
+    // console.log(userId)
+    if (userId === undefined) return Redirect("/")
     if (!page.hasOwnProperty("personalIncDtlPage")) return null;
-    if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
     // console.log(page.personalIncDtlPage)
     
     return(

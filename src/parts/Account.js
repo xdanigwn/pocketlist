@@ -38,22 +38,23 @@ class Account extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { data } = this.props;
-    for (let i = 0; i < data.length; i++){
-      if (prevProps.data[i].balance !== data[i].balance) {
-      this.setState({
-        ...this.state.acc,
-        acc: {
-          _id: data[i]._id,
-          name: data[i].accName,
-          image: data[i].accImageUrl,
-          balance: "( Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(data[i].balance) + " )",
-         
-        },
-      });
-    }
-    }
-   
+    setTimeout(() => {
+      const { data } = this.props;
+      for (let i = 0; i < data.length; i++){
+        if (prevProps.data[i].balance !== data[i].balance) {
+          this.setState({
+            ...this.state.acc,
+            acc: {
+              _id: data[i]._id,
+              name: data[i].accName,
+              image: data[i].accImageUrl,
+              balance: "( Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(data[i].balance) + " )",
+            
+            },
+          });
+        }
+      }
+    }, 5000);
   };
 
   toggleAccount = () => {

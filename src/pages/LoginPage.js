@@ -1,28 +1,37 @@
 import axios from 'axios';
 import React, { useState, 
-    // useContext 
+    useContext 
 } from 'react'
-// import AuthContext from "context/AuthContext"
+import AuthContext from "context/AuthContext"
 import { useHistory } from 'react-router';
 
 function LoginPage()  {
     const [username , setUser ] = useState("");
     const [password , setPass ] = useState("");
-    const [dataCookie, setDataCookie] = useState(null);
+    // const [dataCookie, setDataCookie] = useState(null);
 
-    // const { getLoggedIn }  = useContext(AuthContext)
+    const { getLoggedIn }  = useContext(AuthContext)
     const history = useHistory();
 
-    async function getCookies(e) {
-        e.preventDefault();
-        await axios.get("https://admin-pocketlist.herokuapp.com/api/v1/authcheck" )
-        .then((res) => {
-            setDataCookie(res.data)
-            console.log(res.data)
-        })
-    }
+    // async function Actlogout(e) {
+    //     e.preventDefault();
+    //     await axios.get("http://localhost:3000/api/v1/logout" )
+    //     .then((res) => {
+    //         // console.log(res.data);
+    //     })
+    // }
 
-    async function submitLogin(e) {
+    // async function getCookies(e) {
+    //     e.preventDefault();
+    //     await axios.get("http://localhost:3000/api/v1/authcheck" )
+    //     .then((res) => {
+    //         console.log(res.data)
+    //         setDataCookie(res.data)
+            
+    //     })
+    // }
+
+    function submitLogin(e) {
         e.preventDefault();
         try {
             const loginData = {
@@ -30,17 +39,23 @@ function LoginPage()  {
                 password
             };
 
-            // await axios.post("https://admin-pocketlist.herokuapp.com/api/v1/login", loginData, {withCredentials: true})
+            // await axios.post("http://localhost:3000/api/v1/login", loginData, {withCredentials: true})
             // alert(res.data);
             axios({
                 method: "POST",
                 data: loginData,
                 withCredentials: true,
-                url: "https://admin-pocketlist.herokuapp.com/api/v1/login",
-            }).then((res) => {
+                url: "http://localhost:3000/api/v1/login",
+            }).then(async (res) => {
                 // if ((res.data === "Username tidak ada!") || (res.data === "Password syalah!")){
-                    console.log(res)
-                // } 
+                if (res.data === "Successfully Authenticated"){
+                    // console.log(res.data)
+                    await getLoggedIn();
+                    history.push("/landingpage")
+                }else{
+                    alert("Username / Password Salah")
+                    history.push("/")
+                }
             })
             
             // await getLoggedIn();
@@ -53,6 +68,7 @@ function LoginPage()  {
 
         return (
             <> 
+                
                 <div className="bg-primary bg-fullheight">
                     <div className="container">
                         <div className="row justify-content-center">
@@ -89,10 +105,13 @@ function LoginPage()  {
                                         <button type="submit" className="btn btn-primary btn-user btn-block" >
                                         Login
                                         </button>
-                                        <button onClick={getCookies} className="btn btn-primary btn-user btn-block" >
+                                        {/* <button onClick={getCookies} className="btn btn-primary btn-user btn-block" >
                                         Get Cookies
                                         </button>
-                                        {dataCookie ? <h1>Welcome Back {dataCookie.username}</h1> : null}
+                                        <button onClick={Actlogout} className="btn btn-primary btn-user btn-block" >
+                                        Logout
+                                        </button> */}
+                                        {/* {dataCookie ? <h1>Welcome Back {dataCookie.username}</h1> : null} */}
                                     </form>
                                     </div>
                                 </div>

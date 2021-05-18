@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback,
-  useContext 
+  useContext, useState
 } from "react";
 import { connect } from "react-redux";
 import Header from "parts/Header";
@@ -18,40 +18,40 @@ import { fetchPage } from "store/actions/page";
 // import landingPage from "json/landingPage.json"
 
 function LandingPage(props) {
+    const [didMount, setDidMount] = useState(false);  // TO PREVENT COMPONENT RENDER BEFORE FILL THE PROPS PAGE
     const { page, fetchPage} = props;
-    // const x = 1234
-
-    const { loggedIn, userId }  = useContext(AuthContext)
-    
+    const { userId }  = useContext(AuthContext)
+    // const history = useHistory();
+   
     const refreshPage = useCallback(
       (dateFrom, dateTo) => {
         // console.log(userId)
-        fetchPage(`https://admin-pocketlist.herokuapp.com/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
+        // if(!didMount){
+          fetchPage(`http://localhost:3000/api/v1/overview/${userId}/${dateFrom}/${dateTo}`, "landingPage");
+        // }
       },
-      [fetchPage, 
-        userId
+      [ fetchPage, 
+        userId,
+        // didMount
       ],
     );
 
-    useEffect (() => {
-      // alert(loggedIn);
-      // console.log(x)
-      if(userId){
-        refreshPage(moment().startOf("month").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD"));  // SET FIRST LOAD WITH FIRST DATE OF MONTH - NOW DATE
-      }
-      // return () => {
-      //   alert(loggedIn)
-      // }
-      
-    // }, [refreshPage])
+    useEffect ( () => {
+      // alert(loggedIn);   
 
-  }, [refreshPage, 
-    userId
-  ])
-  // console.log(page)
-    if (!page.hasOwnProperty("landingPage")) return null;
-    if (loggedIn === false) return Redirect("/") // WHEN COMPONENT MOUNTED, CHECK LOGGED IN
-    // console.log(page.landingPage.accTransfer)
+      if(userId){
+          // console.log(didMount);
+          refreshPage(moment().startOf("month").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD"));  // SET FIRST LOAD WITH FIRST DATE OF MONTH - NOW DATE
+          setDidMount(true);
+      }
+      
+      return () => setDidMount(false);
+
+    }, [refreshPage, userId,didMount])
+
+    // console.log(userId);
+    if (userId === undefined) return Redirect("/")
+    if (!userId || !didMount || !page.hasOwnProperty("landingPage") ) { return null  };
 
     return (
       <>
@@ -76,7 +76,7 @@ function LandingPage(props) {
         </section>
         <Footer {...props}></Footer>
       </>
-    );
+    )
   }
 
 const mapStateToProps = (state) => ({
