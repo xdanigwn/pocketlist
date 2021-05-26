@@ -111,7 +111,7 @@ function TabTransfer(props) {
             </div>
             <div className='form-group row'>
                 <label htmlFor='category' className='col-3 col-form-label'>
-                to Account
+                To Acc
                 </label>
                     <div className='col-9'>
                     {/* DROPDOWN CATEGORY */}

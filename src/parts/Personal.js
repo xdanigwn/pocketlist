@@ -65,7 +65,7 @@ function Personal(props) {
       <div className='col-6 col-md-8 mt-3 no-paddingleft-mob no-paddingleft'>
         <div className='card bg-white text-dark'>
           <div className='card-header'>Personal</div>
-          <div className='card-body text-center main my-md-1'>
+          <div className='card-body text-center main my-lg-1'>
             <div className='row'>
               <div className='col-md-6'>
                 <div className='row'>
