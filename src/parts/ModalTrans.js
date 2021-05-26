@@ -27,7 +27,7 @@ function ModalTrans(props) {
             <img
               alt={`${acc.name}`}
               className='left mr-2'
-              src={`${`http://localhost:3000`}/${acc.image}`}
+              src={`${`https://admin-pocketlist.herokuapp.com`}/${acc.image}`}
               style={{ width: "24px" }}
             />
             {acc.name}

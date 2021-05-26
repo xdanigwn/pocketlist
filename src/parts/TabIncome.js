@@ -129,7 +129,7 @@ class TabIncome extends Component {
                     <img
                     alt=''
                     className='left mr-2'
-                    src={`${`http://localhost:3000`}/${ctg.image}`}
+                    src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.image}`}
                     style={{ width: "24px" }}
                     />
                     <span>{ctg.name}</span>
@@ -152,7 +152,7 @@ class TabIncome extends Component {
                             alt=''
                             style={{ width: "32px" }}
                             className='left mr-2'
-                            src={`${`http://localhost:3000`}/${ctg.ctgImageUrl}`}
+                            src={`${`https://admin-pocketlist.herokuapp.com`}/${ctg.ctgImageUrl}`}
                         />
                         <span> {ctg.ctgName} </span>
                         </div>
