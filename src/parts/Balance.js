@@ -48,8 +48,8 @@ import moment from "moment";
           <div className='card bg-primary text-white '>
             <div className='card-header'>Balance</div>
             <div className='card-body main align-items-center text-center'>
-              <h4 className={`card-text mt-4 mt-md-0 ${textUpdated ? "fade-effect" : ""}`}>Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.totaBalance)}</h4>
-              <span>Today : {moment().format("DD MMM YYYY")} </span>
+              <h4 className={`card-text-balance ${textUpdated ? "fade-effect" : ""}`}>Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.totaBalance)}</h4>
+              <span className="card-text-today">Today : {moment().format("DD MMM YYYY")} </span>
             </div>
             <div className='card-footer text-right'>
               <Button href='/landingpage' type='link' onClick={toggleBalance}>

@@ -118,6 +118,23 @@ section {
       }
     }
   }
+
+  @media (max-width: 480px) {
+    .card-text-balance {
+      font-size: 1.4rem; 
+      margin-top: 1.3rem;
+    }
+    .card-text-today {
+      font-size: 0.9rem; 
+    }
+    .card-text-inc-exp {
+      font-size: 0.9rem; 
+    }
+    .card-text-filter {
+      font-size: 0.7rem; 
+    }
+  }
+
   .no-paddingright {
     padding-right: 0px;
   }

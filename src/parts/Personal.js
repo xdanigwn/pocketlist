@@ -76,7 +76,7 @@ function Personal(props) {
                   </div>
                   <div className='col-7 pl-0'>
                     <h6>Income</h6>
-                    <span className={` ${incomeUpdated ? "fade-effect" : ""}`}>Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.sumIncome)}</span>
+                    <span className={` card-text-inc-exp ${incomeUpdated ? "fade-effect" : ""}`}>Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.sumIncome)}</span>
                   </div>
                 </div>
               </div>
@@ -89,14 +89,14 @@ function Personal(props) {
                   </div>
                   <div className='col-7 pl-0'>
                     <h6>Expense</h6>
-                    <span className={` ${expenseUpdated ? "fade-effect" : ""}`} >Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.sumExpense)}</span>
+                    <span className={` card-text-inc-exp ${expenseUpdated ? "fade-effect" : ""}`} >Rp. {Intl.NumberFormat("en-US", { style: "decimal" }).format(props.data.sumExpense)}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className='card-footer'>
-            <div className='float-left mt-2 ml-2'><i><small>Filter : {moment(dateFrom, 'YYYY-MM-DD').format("DD/MM/YYYY")} - {moment(dateTo, 'YYYY-MM-DD').format("DD/MM/YYYY")} </small></i></div>
+            <div className='float-left mt-1 ml-2'><i><small className="hidden-mobile">Filter :</small><small className="card-text-filter"> {moment(dateFrom, 'YYYY-MM-DD').format("DD/MM/YYYY")} - {moment(dateTo, 'YYYY-MM-DD').format("DD/MM/YYYY")} </small></i></div>
             <div className='float-right'>
 
               <Button href='/landingpage' type='link' onClick={toggleBalance}>
