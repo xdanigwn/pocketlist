@@ -102,7 +102,7 @@ class Account extends Component {
                           <img
                             alt=''
                             className='left mr-2'
-                            src={`${`http://localhost:3000`}/${acc.image}`}
+                            src={`${`https://admin-pocketlist.herokuapp.com`}/${acc.image}`}
                             style={{ width: "24px" }}
                           />
                           <span className="hidden-mobile">{acc.name} - </span>
@@ -117,7 +117,7 @@ class Account extends Component {
                               href='/#'
                               className='dropdown-item d-flex justify-content-between'
                               onClick={this.selectAccount}
-                              data-id={account._id}
+                              data-id={account._id} 
                               data-name={account.accName}
                               data-image={account.accImageUrl}
                               data-balance={`${`( Rp.`}${Intl.NumberFormat("en-US", { style: "decimal" }).format(account.balance)} )`}>
@@ -126,7 +126,7 @@ class Account extends Component {
                                   alt=''
                                   style={{ width: "32px" }}
                                   className='left mr-2'
-                                  src={`${`http://localhost:3000`}/${account.accImageUrl}`}
+                                  src={`${`https://admin-pocketlist.herokuapp.com`}/${account.accImageUrl}`}
                                 />
                                 <span className="hidden-mobile">{account.accName} </span>
                               </div>

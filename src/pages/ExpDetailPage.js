@@ -56,11 +56,11 @@ import { Redirect } from 'react-router';
                         page.personalExpDtlPage.trans.map((trans,id) =>
                         <tr key={id}>
                             <td className="text-center">{id+1}</td>
-                            <td className="text-center"><img alt="" width="32px" src={`${`http://localhost:3000`}/${trans.transAcc.accImageUrl}`}></img></td>
+                            <td className="text-center"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${trans.transAcc.accImageUrl}`}></img></td>
                             <td className="text-center">{moment(trans.transDate).format("DD-MM-YYYY") }</td>
                             <td className="text-center">{trans.transDesc}</td>
                             <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(trans.ammount) )}</td>
-                            <td className="text-center"><img alt="" width="32px" src={`${`http://localhost:3000`}/${trans.transCtg.ctgImageUrl}`}></img></td>
+                            <td className="text-center"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${trans.transCtg.ctgImageUrl}`}></img></td>
                         </tr>
                         )
                         }

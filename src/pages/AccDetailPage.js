@@ -33,7 +33,7 @@ import { Link } from "react-router-dom";
                 <div className="my-2">
                     <Link to={"/landingpage"}> <img className="border-right border-light mr-2" src={iconBack} alt='Transaction'></img></Link>
                     {/* MENGAMBIL BALANCE DI MODEL ACCOUNT. DENGAN MENGAMBIL ARRAY KE 0 KARENA CUMA 1 ROW */}
-                    { ` ` } <img alt="" width="32px" src={`${`http://localhost:3000`}/${page.accountDetailPage.trans[0].accountId.accImageUrl}`}/> 
+                    { ` ` } <img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${page.accountDetailPage.trans[0].accountId.accImageUrl}`}/> 
                     { ` ` + page.accountDetailPage.trans[0].accountId.accName + ` - `
                     + ("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(page.accountDetailPage.trans[0].accountId.balance))} 
                 </div> 
@@ -57,7 +57,7 @@ import { Link } from "react-router-dom";
                                 <td className="text-center">{moment(trans.transDate).format("DD-MM-YYYY") }</td>
                                 <td>{trans.transDesc}</td>
                                 <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(trans.ammount) )}</td>
-                                <td className="text-center"><img alt="" width="32px" src={`${`http://localhost:3000`}/${trans.categoryId.ctgImageUrl}`}></img></td>
+                                <td className="text-center"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${trans.categoryId.ctgImageUrl}`}></img></td>
                                 <td className="text-center">{trans.operator}</td>
                                 <th className="text-center">
                                 <Link to="#" onClick={handlerDelete} data-id={trans._id} className='btn btn-block btn-white'>

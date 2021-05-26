@@ -45,7 +45,7 @@ function ModalInfo(props) {
           {
               page.balanceInfo.accDebit.map((accDebit,id) =>
               <tr key={id}>
-                  <td className="text-left"><img alt="" width="32px" src={`${`http://localhost:3000`}/${accDebit.accImageUrl}`}></img>&nbsp;&nbsp;{accDebit.accName}</td>
+                  <td className="text-left"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${accDebit.accImageUrl}`}></img>&nbsp;&nbsp;{accDebit.accName}</td>
                   <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(accDebit.balance) )}</td>
               </tr>
               )
@@ -70,7 +70,7 @@ function ModalInfo(props) {
           {
               page.balanceInfo.accCredit.map((accCredit,id) =>
               <tr key={id}>
-                  <td className="text-left"><img alt="" width="32px" src={`${`http://localhost:3000`}/${accCredit.accImageUrl}`}></img>&nbsp;&nbsp;{accCredit.accName}</td>
+                  <td className="text-left"><img alt="" width="32px" src={`${`https://admin-pocketlist.herokuapp.com`}/${accCredit.accImageUrl}`}></img>&nbsp;&nbsp;{accCredit.accName}</td>
                   <td className="text-center">{("Rp. " + Intl.NumberFormat("en-US", { style: "decimal" }).format(accCredit.balance) )}</td>
               </tr>
               )
